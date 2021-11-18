@@ -8,8 +8,6 @@ class Home extends BaseController
     {
         $data['judul'] = 'Home | Koperasi HIMAKOM';
 
-        echo view ('template/header', $data);
-        echo view ('home/home');
-        echo view ('template/footer');
+        return view('home/home', $data);
     }
 }

@@ -31,11 +31,11 @@ class Database extends Config
      * @var array
      */
     public $default = [
-        'DSN'      => '',
+        'DSN'      => 'localhost',
         'hostname' => 'localhost',
         'username' => '',
         'password' => '',
-        'database' => '',
+        'database' => 'projectuap',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,

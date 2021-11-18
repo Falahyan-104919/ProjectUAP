@@ -1,3 +1,6 @@
+
+<?= $this->extend('template/baselayout');?>
+<?= $this->section('content');?>
 <div class="container mt-5">
     <br><br>
     <div class="h-100 p-5 border rounded-3" style="background-color: #AABA9E ;">
@@ -9,3 +12,4 @@
         </div>
     </div>
 </div>
+<?= $this->endSection();?>

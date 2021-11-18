@@ -8,17 +8,13 @@ class About extends BaseController
     {
         $data['judul'] = 'About | Koperasi HIMAKOM';
 
-        echo view ('template/header', $data);
-        echo view ('about/index');
-        echo view ('template/footer');
+        return view ('about/index', $data);
     }
     
     public function Anggota()
     {
         $data['judul'] = 'About Anggota | Koperasi HIMAKOM';
 
-        echo view ('template/header', $data);
-        echo view ('about/anggota');
-        echo view ('template/footer');
+        return view ('about/anggota', $data);
     }
 }

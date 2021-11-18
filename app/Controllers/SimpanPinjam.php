@@ -2,41 +2,144 @@
 
 namespace App\Controllers;
 
+use App\Controllers\BaseController;
+use App\Models\SimpananModel;
+use App\Models\PinjamanModel;
+
 class SimpanPinjam extends BaseController
 {
+
+    protected $SimpananModel;
+    protected $PinjamanModel;
+
+    public function __construct() {
+        $this->SimpananModel = new SimpananModel();
+        $this->PinjamanModel = new PinjamanModel();
+    }
+
     public function index()
     {
-        $data['judul'] = 'Daftar Simpanan Anggota | Koperasi HIMAKOM';
+        $SimpananModel = model('SimpananModel');
+        $data = [
+            'judul' => "Daftar Simpanan Anggota | Koperasi HIMAKOM",
+            'simpanan' => $SimpananModel->findAll(),
+        ];
 
-        echo view ('template/header', $data);
-        echo view ('simpan/index');
-        echo view ('template/footer');
+        return view ('simpan/index', $data);
     }
     
     public function tambahsimpanan()
     {
-        $data['judul'] = 'Form Tambah Simpanan Koperasi Himakom | Koperasi HIMAKOM';
+        session();
+        $data = [
+            'judul' => 'Form Tambah Simpanan Koperasi Himakom | Koperasi HIMAKOM',
+            'validation' => \Config\Services::validation()
+        ];
 
-        echo view ('template/header', $data);
-        echo view ('simpan/tambahsimpanan');
-        echo view ('template/footer');
+        return view ('simpan/tambahsimpanan', $data); 
+    }
+
+    public function storesimpanan(){
+        $valid = $this->validate([
+            "nama" => [    
+                'label' => "Nama",
+                'rules' => "required",
+                'error' => [
+                    "required" => "{field} Harus Diiisi!",
+                ]
+            ],
+            "jumlah_simpanan" => [
+                'label' => "Jumlah Simpanan",
+                'rules' => "required|numeric",
+                'error' => [
+                    "required" => "{field} Harus Diisi!",
+                    "numeric" => "{field} Harus Berupa Angka!",
+                ]
+            ],
+        ]);
+
+        if($valid){
+            $data = [
+                'nama' => $this->request->getVar('nama'),
+                'jumlah_simpanan' => $this->request->getVar('jumlah_simpanan'),
+                'metode' => $this->request->getVar('metode')
+            ];
+
+            $SimpananModel = model("SimpananModel");
+            $SimpananModel -> insert($data);
+            return redirect()->to(base_url('simpanpinjam'));
+
+        }else{
+
+            return redirect()->to(base_url('simpanpinjam/tambahsimpanan'))->withInput()->with('validation', $this->validator);
+
+        }
+
     }
 
     public function daftarpinjaman()
     {
-        $data['judul'] = 'Daftar Pinjaman Koperasi Himakom | Koperasi HIMAKOM';
+        $PinjamanModel = model('PinjamanModel');
+        $data = [
+            'judul' => 'Daftar Pinjaman Koperasi Himakom | Koperasi HIMAKOM',
+            'pinjaman' => $PinjamanModel->findAll(),
+        ];
 
-        echo view ('template/header', $data);
-        echo view ('pinjam/index');
-        echo view ('template/footer');
+        return view ('pinjam/index', $data);
     }
 
     public function tambahpinjaman()
     {
-        $data['judul'] = 'Form Tambah Pinjaman Koperasi Himakom | Koperasi HIMAKOM';
-
-        echo view ('template/header', $data);
-        echo view ('pinjam/tambahpinjaman');
-        echo view ('template/footer');
+        session();
+        $data = [
+            'judul' => 'Form Tambah Pinjaman Koperasi Himakom | Koperasi HIMAKOM',
+            'validation' => \Config\Services::validation()
+        ];
+        return view ('pinjam/tambahpinjaman', $data);
     }
+
+    public function storepinjaman(){
+        $valid = $this->validate([
+            "nama" => [    
+                'label' => "Nama",
+                'rules' => "required",
+                'error' => [
+                    "required" => "{field} Harus Diiisi!",
+                ]
+            ],
+            "jumlah_pinjaman" => [
+                'label' => "Jumlah Pinjaman",
+                'rules' => "required|numeric",
+                'error' => [
+                    "required" => "{field} Harus Diisi!",
+                    "numeric" => "{field} Harus Berupa Angka!",
+                ]
+            ],
+            "alasan_pinjam" => [
+                'label' => "Alasan Pinjaman",
+                'rules' => "required",
+                'error' => [
+                    "required" => "{field} Harus Diisi!",
+                ]
+            ]
+        ]);
+
+        if($valid){
+            $data = [
+                'nama' => $this->request->getVar('nama'),
+                'jumlah_pinjaman' => $this->request->getVar('jumlah_pinjaman'),
+                'alasan_pinjam' => $this->request->getVar('alasan_pinjam')
+            ];
+
+            $SimpananModel = model("PinjamanModel");
+            $SimpananModel -> insert($data);
+            return redirect()->to(base_url('simpanpinjam/daftarpinjaman'));
+
+        }else{
+
+            return redirect()->to(base_url('simpanpinjam/tambahpinjaman'))->withInput()->with('validation', $this->validator);
+
+        }
+    }
+
 }

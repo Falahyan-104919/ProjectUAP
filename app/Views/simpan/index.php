@@ -1,3 +1,5 @@
+<?= $this->extend('template/baselayout');?>
+<?= $this->section('content');?>
 <div class="row mb-2">
     <div class="col md-6">
         <h4>Daftar Simpanan Anggota Koperasi Himakom</h4>
@@ -37,17 +39,20 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php foreach($simpanan as $s => $simpanan) : ?>
                     <tr>
-                        <td>1</td>
-                        <td>Nama 1</td>
-                        <td>Simpanan 1</td>
+                        <th scope="row"><?= $s +1 ;?></th>
+                        <td><?=$simpanan['nama'];?></td>
+                        <td>Rp. <?=$simpanan['jumlah_simpanan']?></td>
                         <td>
                             <a href="#" class="badge bg-warning">Edit</a>
                             <a href="#" class="badge bg-primary">Detail</a>
                             <a href="#" class="badge bg-danger" onclick="return confirm('Apakah anda yakin?')">Delete</a>
                         </td>
                     </tr>
+                    <?php endforeach ;?>
                 </tbody>
         </table>
     </div>
 </div>
+<?= $this->endSection();?>

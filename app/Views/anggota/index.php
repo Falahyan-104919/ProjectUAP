@@ -1,3 +1,5 @@
+<?= $this->extend('template/baselayout');?>
+<?= $this->section('content');?>
 <div class="row mb-2">
     <div class="col md-6">
         <h4>Daftar Anggota Koperasi Himakom</h4>
@@ -37,7 +39,20 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php foreach($anggota as $a => $anggota) : ?>
+                        <tr>
+                            <th scope="row"><?= $a + 1;?></th>
+                            <td><?= $anggota['nama'];?></td>
+                            <td><?= $anggota['no_hp'];?></td>
+                            <td>
+                                <a href="anggota/detail" class="btn btn-sm btn-primary me-1">Detail</a>
+                                <a href="anggota/edit" class="btn btn-sm btn-warning me-1">Edit</a>
+                                <a href="anggota/delete" class="btn btn-sm btn-danger me-1" >Delete</a>
+                            </td>
+                        </tr>
+                    <?php endforeach ;?>
                 </tbody>
         </table>
     </div>
 </div>
+<?= $this->endSection();?>

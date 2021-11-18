@@ -1,3 +1,5 @@
+<?= $this->extends('template/baselayout');?>
+<?= $this->section('content');?>
 <div class="row mt-5">
     <div class="col">
         <div class="card border-primary">
@@ -22,3 +24,4 @@
         </div>
     </div>
 </div>
+<?= $this->endSection();?>
