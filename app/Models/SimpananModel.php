@@ -15,7 +15,7 @@ class SimpananModel extends Model
         if($id == false){
             return $this->findAll();
         }
-        return $this->where(['id' => $id])-> first();
+        return $this->where(['id_simpanan' => $id])-> first();
     }
 
 }

@@ -36,7 +36,7 @@ class Database extends Config
         'username' => '',
         'password' => '',
         'database' => 'projectuap',
-        'DBDriver' => 'MySQLi',
+        'DBDriver' => 'SQLite3',
         'DBPrefix' => '',
         'pConnect' => false,
         'DBDebug'  => (ENVIRONMENT !== 'production'),

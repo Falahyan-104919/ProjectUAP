@@ -1,4 +1,4 @@
-<?= $this->extends('template/baselayout');?>
+<?= $this->extend('template/baselayout');?>
 <?= $this->section('content');?>
 <div class="row mt-5">
     <div class="col">

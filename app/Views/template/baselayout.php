@@ -3,8 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://kit.fontawesome.com/e9b89c454e.js" crossorigin="anonymous"></script> 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
-    <title><?=$judul;?></title>
+    <title>-</title>
   </head>
     <body>
       
@@ -23,22 +24,38 @@
                             <a class="nav-link dropdown-toggle" role="button" href="/anggota" data-bs-toggle="dropdown">Anggota</a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-item"><a class="nav-link" aria-current="page" href="/anggota">Lihat Anggota</a></li>
+                                <?php if(in_groups('Admin')):?>
                                 <li><hr class="dropdown-divider"></li>
                                 <li class="dropdown-item"><a class="nav-link" aria-current="page" href="/anggota/tambah">Tambah Anggota</a></li>
+                                <?php endif;?>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" role="button" href="/anggota" data-bs-toggle="dropdown">Simpan Pinjam</a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-item"><a class="nav-link" aria-current="page" href="/simpanpinjam/index">Lihat Daftar Simpanan</a></li>
+                                <?php if(in_groups('Admin')):?>
                                 <li><hr class="dropdown-divider"></li>
                                 <li class="dropdown-item"><a class="nav-link" aria-current="page" href="/simpanpinjam/daftarpinjaman">Lihat Daftar Pinjaman</a></li>
+                                <?php endif;?>
                             </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="/about">About</a>
                         </li>
                     </ul>
+                    <?php if(logged_in('Admin|Regular User')) : ?>
+                    <ul class="navbar-nav d-flex justify-content-end">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" role="button" href="" data-bs-toggle="dropdown"><?= user()->username;?></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-item"><a class="nav-link" aria-current="page" href="">Your Profile</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li class="dropdown-item"><a class="nav-link" aria-current="page" href="<?= base_url('logout');?>">Log Out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <?php endif;?>
                 </div>
             </div>
         </nav>        

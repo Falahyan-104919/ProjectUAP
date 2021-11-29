@@ -15,16 +15,31 @@ class Anggota extends Migration
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
+            'username' =>[
+                'type' => 'VARCHAR',
+                'constraint' => 25,
+            ],
+            'password' =>[
+                'type' => 'VARCHAR',
+                'constraint'=> 20,
+            ],
+            'email' =>[
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+            ],
             'nama' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
+                'null' => true,
             ],
             'no_hp' => [
                 'type' => 'VARCHAR',
                 'constraint' => 13,
+                'null' => true,
             ],
             'alamat' => [
                 'type' => 'TEXT',
+                'null' => true,
             ],
             'gender' => [
                 'type' => 'VARCHAR',

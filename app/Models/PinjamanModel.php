@@ -16,7 +16,7 @@ class PinjamanModel extends Model
         if($id == false){
             return $this->findAll();
         }
-        return $this->where(['id' => $id])-> first();
+        return $this->where(['id_pinjaman' => $id])-> first();
     }
 
 }
