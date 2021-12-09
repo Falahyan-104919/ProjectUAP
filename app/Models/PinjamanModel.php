@@ -19,4 +19,11 @@ class PinjamanModel extends Model
         return $this->where(['id_pinjaman' => $id])-> first();
     }
 
+    public function search($keyword){
+        $builder = $this->table('pinjaman');
+        $builder->like('nama', $keyword)->orLike('alasan_pinjam', $keyword);
+        
+        return $builder;
+    }
+
 }

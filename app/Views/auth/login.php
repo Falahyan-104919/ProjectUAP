@@ -13,13 +13,13 @@
                         <div class="d-flex flex-row md-3">
                             <img src="img/koperasi.png" class="img-thumbnail" style=" width: 250px; height: 250px; margin-bottom: 10px; margin-right:20px;" alt="Profile Pincture">
                             <div class="col-lg mt-5">
-                            <form action="<?= route_to('login') ?>" method="post">
+                            <form action="<?= route_to('login')?>" method="post">
 						        <?= csrf_field() ?>
                         <?php if ($config->validFields === ['email']): ?>
 						<div class="form-group">
 							<label for="login"><?=lang('Auth.email')?></label>
 							<input type="email" class="form-control <?php if(session('errors.login')) : ?>is-invalid<?php endif ?>"
-								   name="login" placeholder="<?=lang('Auth.email')?>">
+								   name="login" placeholder="<?=lang('Auth.email')?>" autocomplete="off">
 							<div class="invalid-feedback">
 								<?= session('errors.login') ?>
 							</div>
@@ -28,7 +28,7 @@
 						<div class="form-group">
 							<label for="login"><?=lang('Auth.emailOrUsername')?></label>
 							<input type="text" class="form-control <?php if(session('errors.login')) : ?>is-invalid<?php endif ?>"
-								   name="login" placeholder="<?=lang('Auth.emailOrUsername')?>">
+								   name="login" placeholder="<?=lang('Auth.emailOrUsername')?>" autocomplete="off">
 							<div class="invalid-feedback">
 								<?= session('errors.login') ?>
 							</div>

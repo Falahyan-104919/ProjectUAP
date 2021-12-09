@@ -1,16 +1,23 @@
 <?php
 
 namespace App\Controllers;
+// require_once "vendor/autoload.php";
 
 use App\Models\AnggotaModel;
+use App\Models\UserModeltest;
+use Myth\Auth\Models\UserModel;
+
 
 class Anggota extends BaseController
 {
     
     protected $AnggotaModel;
+    protected $UserModel;
     
     public function __construct(){
         $this->AnggotaModel = new AnggotaModel();
+        $this-> UserModel    = new UserModel();
+        // $this->UserModeltest = new UserModeltest();
     }
 
     public function index()
@@ -81,6 +88,7 @@ class Anggota extends BaseController
 
     if($valid){
         $data = [
+            'id_user' => user_id(),
             'nama' => $this->request->getVar('nama'),
             'no_hp' => $this->request->getVar('no_hp'),
             'alamat' => $this->request->getVar('alamat'),
@@ -89,7 +97,9 @@ class Anggota extends BaseController
 
         $AnggotaModel = model('AnggotaModel');
         $AnggotaModel -> save($data);
-        session()->setFlashData('pesan', 'Data Berhasil DItambahkan');
+        // $UserModel = model('UserModel');
+        // user()-> insert(user()->id, ['id_anggota' => $AnggotaModel -> getInsertID()]);
+        session()->setFlashData('pesan', 'Data Berhasil Di-Tambahkan');
         return redirect() -> to(base_url('anggota'));
     }else{
         return redirect()->to(base_url('anggota/tambah'))->withInput()->with('validation', $this->validator);
@@ -103,7 +113,7 @@ class Anggota extends BaseController
             'anggota' => $this->AnggotaModel->getAnggota($id),
         ];
 
-        return view('anggota/detail.php', $data);
+        return view('anggota/detail', $data);
     }
 
     public function delete($id){
@@ -168,11 +178,22 @@ class Anggota extends BaseController
 
             $AnggotaModel = model('AnggotaModel');
             $AnggotaModel -> save($data);
+            // user()->update('id')
             session()->setFlashData('pesan', 'Data berhasil di Ubah');
             return redirect() -> to(base_url('anggota'));
         }else{
             return redirect()->to(base_url('/anggota/edit/'.$this->request->getVar('id_anggota')))->withInput()->with('validation', $this->validator);
         }
+    }
+
+    public function uas($id){
+        $data = [
+			'no_hp' => 'dihapus'
+		];
+
+		$this->AnggotaModel->update($id,$data);
+        session()->setFlashData('pesan', 'Berhasil');
+		return redirect()->to(base_url('/anggota'));
     }
 
 }

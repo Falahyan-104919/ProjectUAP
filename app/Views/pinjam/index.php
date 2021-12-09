@@ -49,22 +49,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($pinjaman as $p => $pinjaman) : ?>
+                    <?php $i = 1 + (15 * ($currentPage - 1)); ?>
+                    <?php foreach($pinjaman as $p) : ?>
                     <tr>
-                        <th scope="row"> <?= $p + 1; ?></th>
-                        <td><?= $pinjaman['nama'];?></td>
-                        <td><?= $pinjaman['jumlah_pinjaman'];?></td>
-                        <td><?= $pinjaman['alasan_pinjam'];?></td>
+                        <th scope="row"> <?= $i++ ?></th>
+                        <td><?= $p['nama'];?></td>
+                        <td>Rp. <?= $p['jumlah_pinjaman'];?></td>
+                        <td><?= $p['alasan_pinjam'];?></td>
                         <?php if(in_groups('Admin')):?>
                         <td>
-                            <a href="/simpanpinjam/editpinjaman/<?=$pinjaman['id_pinjaman'];?>" class="btn btn-sm btn-warning me-1">Edit</a>
-                            <a href="/simpanpinjam/deletepinjaman/<?=$pinjaman['id_pinjaman'];?>" class="btn btn-sm btn-success me-1" onclick="return confirm('Apakah anda yakin?')">Lunas</a>
+                            <a href="/simpanpinjam/editpinjaman/<?=$p['id_pinjaman'];?>" class="btn btn-sm btn-warning me-1">Edit</a>
+                            <a href="/simpanpinjam/deletepinjaman/<?=$p['id_pinjaman'];?>" class="btn btn-sm btn-success me-1" onclick="return confirm('Apakah anda yakin?')">Lunas</a>
                         </td>
                         <?php endif;?>
                     </tr>
                     <?php endforeach ;?>
                 </tbody>
         </table>
+    <?= $pager->links('pinjaman','pinjaman_pagination');?>
+
     </div>
 </div>
 <?= $this->endSection();?>

@@ -18,4 +18,11 @@ class SimpananModel extends Model
         return $this->where(['id_simpanan' => $id])-> first();
     }
 
+    public function search($keyword){
+        $builder = $this->table('simpanan');
+        $builder->like('nama', $keyword);
+        
+        return $builder;
+    }
+
 }

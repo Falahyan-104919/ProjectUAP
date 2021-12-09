@@ -19,10 +19,25 @@ class SimpanPinjam extends BaseController
 
     public function index()
     {
+        
+        $currentPage = $this->request->getVar('page_simpanan') ? $this->request->getVar('page_simpanan') : 1;
+
+        $SimpananModel = model("SimpananModel");
+
+
+        $keyword = $this->request->getVar('keyword');
+        if($keyword){
+            $SimpananModel->search($keyword);
+        }else{
+            $SimpananModel;
+        }
+
         $SimpananModel = model('SimpananModel');
         $data = [
             'judul' => "Daftar Simpanan Anggota | Koperasi HIMAKOM",
-            'simpanan' => $SimpananModel->findAll(),
+            'simpanan' => $SimpananModel->paginate(15,'simpanan'),
+            'pager'    => $SimpananModel->pager,
+            'currentPage' => $currentPage
         ];
 
         return view ('simpan/index', $data);
@@ -135,10 +150,26 @@ class SimpanPinjam extends BaseController
 
     public function daftarpinjaman()
     {
+
+        $currentPage = $this->request->getVar('page_pinjaman') ? $this->request->getVar('page_pinjaman') : 1;
+
+        $PinjamanModel = model("PinjamanModel");
+
+
+        $keyword = $this->request->getVar('keyword');
+        if($keyword){
+            $PinjamanModel->search($keyword);
+        }else{
+            $PinjamanModel;
+        }
+
+
         $PinjamanModel = model('PinjamanModel');
         $data = [
             'judul' => 'Daftar Pinjaman Koperasi Himakom | Koperasi HIMAKOM',
-            'pinjaman' => $PinjamanModel->findAll(),
+            'pinjaman' => $PinjamanModel->paginate(15,'pinjaman'),
+            'pager'    => $PinjamanModel->pager,
+            'currentPage' => $currentPage
         ];
 
         return view ('pinjam/index', $data);

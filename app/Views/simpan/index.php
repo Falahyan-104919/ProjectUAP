@@ -48,24 +48,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($simpanan as $s => $simpanan) : ?>
+                    <?php $i = 1 + (15 * ($currentPage - 1)); ?>
+                    <?php foreach($simpanan as $s) : ?>
                     <tr>
-                        <th scope="row"><?= $s +1 ;?></th>
-                        <td><?=$simpanan['nama'];?></td>
-                        <td>Rp. <?=$simpanan['jumlah_simpanan']?></td>
+                        <th scope="row"><?= $i++ ;?></th>
+                        <td><?=$s['nama'];?></td>
+                        <td>Rp. <?=$s['jumlah_simpanan']?></td>
                         <?php if(in_groups('Admin')):?>
                         <td>
-                            <a href="/simpanpinjam/editsimpanan/<?= $simpanan['id_simpanan'];?>" class="btn btn-sm btn-warning me-1">
+                            <a href="/simpanpinjam/editsimpanan/<?= $s['id_simpanan'];?>" class="btn btn-sm btn-warning me-1">
                                 <i class="fas fa-"></i>
                                 Edit
                             </a>
-                            <a href="/simpanpinjam/deletesimpanan/<?= $simpanan['id_simpanan'];?>" class="btn btn-sm btn-danger me-1" onclick="return confirm('Apakah anda yakin?')">Delete</a>
+                            <a href="/simpanpinjam/deletesimpanan/<?= $s['id_simpanan'];?>" class="btn btn-sm btn-danger me-1" onclick="return confirm('Apakah anda yakin?')">Delete</a>
                         </td>
                         <?php endif;?>
                     </tr>
                     <?php endforeach ;?>
                 </tbody>
         </table>
+        <?= $pager->links('simpanan','anggota_pagination');?>
     </div>
 </div>
 <?= $this->endSection();?>

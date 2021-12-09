@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://kit.fontawesome.com/e9b89c454e.js" crossorigin="anonymous"></script> 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
-    <title>-</title>
+    <title>
+        <?php if(!logged_in()) : ?>
+            Login | Register |Koperasi HIMAKOM
+        <?php else : ?>
+            KOPERASI HIMAKOM
+        <?php endif; ?>
+    </title>
   </head>
     <body>
       
@@ -34,10 +40,8 @@
                             <a class="nav-link dropdown-toggle" role="button" href="/anggota" data-bs-toggle="dropdown">Simpan Pinjam</a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-item"><a class="nav-link" aria-current="page" href="/simpanpinjam/index">Lihat Daftar Simpanan</a></li>
-                                <?php if(in_groups('Admin')):?>
                                 <li><hr class="dropdown-divider"></li>
                                 <li class="dropdown-item"><a class="nav-link" aria-current="page" href="/simpanpinjam/daftarpinjaman">Lihat Daftar Pinjaman</a></li>
-                                <?php endif;?>
                             </ul>
                         </li>
                         <li class="nav-item">

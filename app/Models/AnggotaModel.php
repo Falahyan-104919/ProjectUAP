@@ -8,7 +8,7 @@ class AnggotaModel extends Model
 {
     protected $table            = 'anggota';
     protected $primaryKey       = 'id_anggota';
-    protected $allowedFields    = ['nama', 'no_hp', 'alamat', 'gender', 'created_at', 'updated_at'];
+    protected $allowedFields    = ['id_user','nama', 'no_hp', 'alamat', 'gender', 'created_at', 'updated_at'];
     protected $useTimestamps = false;
  
     public function getAnggota($id = false){

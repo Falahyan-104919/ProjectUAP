@@ -32,7 +32,7 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-
+$routes->get('detail/(:num)', 'Home::index/$1');
 
 $routes->get('/', 'Anggota::index');
 $routes->get('/', 'Anggota::tambah');
@@ -40,10 +40,10 @@ $routes->get('/', 'Anggota::tambah');
 
 $routes->get('/', 'About::index');
 
-$routes->get('/', 'SimpanPinjam::index');
-$routes->get('/', 'SimpanPinjam::daftarpinjaman');
+$routes->get('simpanpinjam/index', 'SimpanPinjam::index');
+$routes->get('simpanpinjam/daftarpinjaman', 'SimpanPinjam::daftarpinjaman');
 $routes->get('/', 'SimpanPinjam::tambahpinjaman');
-$routes->get('/', 'SimpanPinjam::daftarsimpanan');
+$routes->get('simpanpinjam/index', 'SimpanPinjam::daftarsimpanan');
 $routes->get('/', 'SimpanPinjam::tambahsimpanan');
 
 /*
